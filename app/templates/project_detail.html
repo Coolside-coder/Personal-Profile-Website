@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }} - Details{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li> 
+            <li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="mb-3">{{ project.name }}</h1>
+
+            <div class="mb-4">
+                {% for tech in project.tech %}
+                    <span class="badge bg-secondary fs-6 me-1">{{ tech }}</span>
+                {% endfor %}
+            </div>
+
+            <p class="lead">{{ project.details }}</p>
+
+            <hr>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li>Responsive Design</li>
+                <li>Clean Structure</li>
+                <li>Easy to Deploy</li>
+            </ul>
+
+            <div class="mt-4">
+                <a href="{{ project.repo_link }}" target="_blank" class="btn btn-dark">
+                    <i class="bi bi-github"></i> View on Github
+                </a>
+                <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Back to list</a>
+            </div>
+
+        </div>
+
+        <div class"col-md-4">
+            <div class="p-4 bg-light rounded">
+                <h4>Project Stats</h4>
+                <p><strong>Status:</strong> Completed</p>
+                <p><strong>Date:</strong> Oct 2023</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
