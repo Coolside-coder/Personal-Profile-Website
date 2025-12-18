@@ -52,3 +52,11 @@ def project_detail(id):
     
     # 3. Render the detail template with the specific project data.
     return render_template('project_detail.html', project=project)
+
+# This decorator tells flask to handle 404 errors using this function
+# 'app_errorhandler' means it catches errors for the entire application, not just this blueprint.
+@bp.app_errorhandler(404)
+def not_found_error(error):
+    # We return the template AND the status code 404.
+    # By default, Flask returns 200 (OK), so we must be explicit here.
+    return render_template('404.html'), 404
