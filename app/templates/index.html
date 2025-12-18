@@ -10,24 +10,35 @@
             I specialize in building robust web applications with Flask. 
             Check out my projects below to see what I can do.
         </p>
-        <button class="btn btn-primary btn-lg" type="button">View Projects</button>
     </div>
 </div>
 
-<div class="row align-items-md-stretch">
-    <div class="col-md-6">
-        <div class="h-100 p-5 text-bg-dark rounded-3">
-            <h2>About Me</h2>
-            <p>I am passionate about clean code, API development, and automation.</p>
-            <button class="btn btn-outline-light" type="button">Read More</button>
+<h2 class="mb-4 text-center">My Projects</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for project in projects %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                Project #{{ project.id }}
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ project.name }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                
+                <div class="mb-3">
+                    {% for tech in project.tech %}
+                        <span class="badge bg-primary">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="card-footer bg-transparent border-top-0">
+                <a href="#" class="btn btn-outline-dark w-100">View Details</a>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
-            <h2>Latest Work</h2>
-            <p>Explore my repository of 20 Flask projects demonstrating various skills.</p>
-            <button class="btn btn-outline-secondary" type="button">Go to GitHub</button>
-        </div>
+    {% endfor %}
     </div>
-</div>
 {% endblock %}
