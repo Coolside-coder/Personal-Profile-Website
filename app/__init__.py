@@ -3,7 +3,10 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
     
-    #we will import routes later
+    # Required for session/flash messages.
+    # In production, this should be a complex random string in an .env file.
+    app.config['SECRET_KEY'] = 'dev-secret-key-123'
+    
     from app import routes
     app.register_blueprint(routes.bp)
     

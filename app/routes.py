@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
 bp = Blueprint('main', __name__)
 
@@ -60,3 +60,22 @@ def not_found_error(error):
     # We return the template AND the status code 404.
     # By default, Flask returns 200 (OK), so we must be explicit here.
     return render_template('404.html'), 404
+
+#New Contact Route
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        #Capture form data (In A real app, you'd send an email here)
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        #Simple Verification
+        if not name or not email or not message:
+            flash('Please Fill Out All Fields!', 'danger')
+        else:
+            # "Flash" stores a message for the next page load
+            flash(f'Thanks {name}! Your message has been sent successfully.', 'success')
+            return redirect(url_for('main.contact'))
+        
+    return render_template('contact.html')
